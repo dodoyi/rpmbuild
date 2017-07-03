@@ -1,0 +1,174 @@
+Building RPM from a tarball
+安装创建rpm包所需要的软件
+# yum update
+# yum groupinstall "Development Tools"
+# yum install rpmdevtools rpm-build  redhat-rpm-config  openssl-devel
+
+如果你的用户目录主目录下没有类似目录结构，你可以通过一个工具软件来自动配置和生成，如下。
+＃yum install rpmdevtools
+下了运行自动配置命令自动生成如上目录，并配置一些必要操作。
+＃rpmdev-setuptree
+rpmdev-setuptree命令默认将再当前用户主目录下创建一个RPM构建根目录结构，
+如果需要改变次默认位置，可以修改配置文件:~/.rpmmacros中变量_topdir对应
+的值即可。 
+
+开始制作rpm包
+下载所需要打包的软件源码，httpd-2.2.17.tar.gz该tar包里面已经有官方写好了的spec文件所以不需要再写了。如果你想写可以把tar包解开加入自己想定义的内容，再用命令rpmbuild --rmspec httpd.spec
+
+$ rpmbuild -tb httpd-2.2.17.tar.gz
+error: Failed build dependencies:
+apr-devel is needed by httpd-2.2.17-1.x86_64
+apr-util-devel is needed by httpd-2.2.17-1.x86_64
+openldap-devel is needed by httpd-2.2.17-1.x86_64
+db4-devel is needed by httpd-2.2.17-1.x86_64
+expat-devel is needed by httpd-2.2.17-1.x86_64
+pcre-devel >= 5.0 is needed by httpd-2.2.17-1.x86_64
+/usr/bin/apr-1-config is needed by httpd-2.2.17-1.x86_64
+/usr/bin/apu-1-config is needed by httpd-2.2.17-1.x86_64
+编译环境缺少这些依赖包，把所需要的依赖包都安装上
+
+$ sudo /usr/bin/yum install apr-devel apr-util-devel openldap-devel db4-devel expat-devel pcre-devel
+
+And try, try, again:
+
+$ rpmbuild -tb httpd-2.2.17.tar.gz
+
+(Lots of text scrolls past, ending with:
+
+configure: error: distcache support failed: can't include distcache headerserror: Bad exit status from /var/tmp/rpm-tmp.71094 (%build)RPM build errors: Bad exit status from /var/tmp/rpm-tmp.1844 (%build)
+
+安装distcache
+$ sudo yum install distcache distcache-devel
+$ rpmbuild -tb httpd-2.2.17.tar.gz
+Executing(%clean): /bin/sh -e /var/tmp/rpm-tmp.55847
++ umask 022
++ cd /home/rpmbuilder/rpmbuild/BUILD
++ cd httpd-2.2.17
++ rm -rf /var/tmp/httpd-2.2.17-1-root
++ exit 0
+
+Look in the RPMs/arch/ dir for the product of your (or my) hard work:
+
+$ ls rpmbuild/RPMS/x86_64/
+httpd-2.2.17-1.x86_64.rpm httpd-devel-2.2.17-1.x86_64.rpm mod_ssl-2.2.17-1.x86_64.rpm
+httpd-debuginfo-2.2.17-1.x86_64.rpm httpd-manual-2.2.17-1.x86_64.rpm
+
+制作成功！
+
+
+Building RPM from a SRPM
+参考文档：https://wiki.centos.org/HowTos/RebuildSRPM
+只用官方的源码打包不自定义配置文件
+[user@host ~]$ rpmbuild --rebuild /tmp/mypackage-1.0.0-1.src.rpm
+用SRPM通过specfile进行打包
+[user@host ~]$ rpm --nomd5 -i /tmp/mypackage-1.0.0-1.src.rpm
+此时当前目录下会创建rpmbuild的环境目录(suse的相关文件会解压缩在/usr/src/packages/下)。~/rpmbuild/ 源码包的内容已经被释放到~/rpmbuild/SOURCE目录下。进入~/rpmbuild/SPECS 对spec文件按照自己的需求进行编辑，编辑之后运行rpmbuild -ba mypackage.spec 会在~/rpmbuild/RPM内生成自定义的RPM包
+[user@host ~]$ cd ~/rpmbuild/SPECS
+[user@host ~]$ vi ~/rpmbuild/SPECS
+[user@host SPECS]$ rpmbuild -ba mypackage.spec
+
+
+参考文档：
+http://www.ibm.com/developerworks/cn/linux/management/package/rpm/part1/
+http://www.ibm.com/developerworks/cn/linux/management/package/rpm/part2/
+http://www.ibm.com/developerworks/cn/linux/management/package/rpm/part3/
+http://fedoraproject.org/wiki/How_to_create_an_RPM_package/zh-cn#.E5.88.86.E7.A6.BB.E7.A8.8B.E5.BA.8F
+
+spec文件的例子：indent-1.spec
+Summary: GNU indent
+Name: indent
+Version: 2.2.6
+Release: 1
+Source0: %{name}-%{version}.tar.gz
+License: GPL
+Group: Development/Tools
+%description
+The GNU indent program reformats C code to any of a variety of
+formatting standards, or you can define your own.
+%prep
+%setup -q
+%build
+./configure
+make
+%install
+make install
+%files
+%defattr(-,root,root)
+/usr/local/bin/indent
+%doc /usr/local/info/indent.info
+%doc %attr(0444,root,root) /usr/local/man/man1/indent.1
+%doc COPYING AUTHORS README NEWS
+描述文件说明如下：
+（1） 文件头
+一般的spec文件头包含以下几个域：
+Summary：
+用一句话概括该软件包尽量多的信息。
+Name：
+软件包的名字，最终RPM软件包是用该名字与版本号，释出号及体系号来命名软件包的。
+Version：
+软件版本号。仅当软件包比以前有较大改变时才增加版本号。
+Release：
+软件包释出号。一般我们对该软件包做了一些小的补丁的时候就应该把释出号加1。
+Vendor：
+软件开发者的名字。
+Copyright：
+软件包所采用的版权规则。具体有：GPL（自由软件），BSD，MIT，Public Domain（公共域），Distributable（贡献），commercial（商业），Share（共享）等，一般的开发都写GPL。
+Group：?
+软件包所属类别，具体类别有：
+Amusements/Games （娱乐/游戏）
+Amusements/Graphics（娱乐/图形）
+Applications/Archiving （应用/文档）
+Applications/Communications（应用/通讯）
+Applications/Databases （应用/数据库）
+Applications/Editors （应用/编辑器）
+Applications/Emulators （应用/仿真器）
+Applications/Engineering （应用/工程）
+Applications/File （应用/文件）
+Applications/Internet （应用/因特网）
+Applications/Multimedia（应用/多媒体）
+Applications/Productivity （应用/产品）
+Applications/Publishing（应用/印刷）
+Applications/System（应用/系统）
+Applications/Text （应用/文本）
+Development/Debuggers （开发/调试器）
+Development/Languages （开发/语言）
+Development/Libraries （开发/函数库）
+Development/System （开发/系统）
+Development/Tools （开发/工具）
+Documentation （文档）
+System Environment/Base（系统环境/基础）
+System Environment/Daemons （系统环境/守护）
+System Environment/Kernel （系统环境/内核）
+System Environment/Libraries （系统环境/函数库）
+System Environment/Shells （系统环境/接口）
+User Interface/Desktops（用户界面/桌面）
+User Interface/X （用户界面/X窗口）
+User Interface/X Hardware Support （用户界面/X硬件支持）
+Source：
+源程序软件包的名字。如 stardict-2.0.tar.gz。
+%description：
+软件包详细说明，可写在多个行上。
+（2）%prep段
+这个段是预处理段，通常用来执行一些解开源程序包的命令，为下一步的编译安装作准备。%prep和下面的%build，%install段一样，除了可以执行RPM所定义的宏命令（以%开头）以外，还可以执行SHELL命令，命令可以有很多行，如我们常写的tar解包命令。
+（3）build段
+本段是建立段，所要执行的命令为生成软件包服务，如make 命令。
+（4）%install段
+本段是安装段，其中的命令在安装软件包时将执行，如make install命令。
+（5）%files段
+本段是文件段，用于定义软件包所包含的文件，分为三类--说明文档（doc），配置文件（config）及执行程序，还可定义文件存取权限，拥有者及组别。
+（6）%changelog段
+本段是修改日志段。你可以将软件的每次修改记录到这里，保存到发布的软件包中，以便查询之用。每一个修改日志都有这样一种格式：第一行是：* 星期 月 日 年 修改人 电子信箱。其中：星期、月份均用英文形式的前3个字母，用中文会报错。接下来的行写的是修改了什么地方，可写多行。一般以减号开始，便于后续的查阅。
+%pre
+在安装包之前运行
+%post
+在安装包之后运行
+%preun
+在卸载包之前运行
+%postun
+在卸载包之后运行
+安装及卸载：
+http://www.ibm.com/developerworks/cn/linux/management/package/rpm/part2/
+http://www.ibm.com/developerworks/library/l-rpm2/
+
+http://ftp.redhat.com/redhat/linux/enterprise/6Server/en/os/SRPMS/
+http://download.opensuse.org/repositories/devel:/tools/SLE_12/src/
