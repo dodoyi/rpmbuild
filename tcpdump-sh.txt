@@ -1,0 +1,93 @@
+#!/bin/bash
+
+#script name main_dump.sh
+#####################IP ADDR#####################
+ETHX=eth0
+HOSTIP=`/sbin/ifconfig $ETHX |sed -n '/inet addr/s/^[^:]*:\([0-9.]\{7,15\}\) .*/\1/p'| grep -v "127.0.0.1"`
+if [ ! "$HOSTIP" ]
+then
+	HOSTIP=`/sbin/ifconfig bond0 |sed -n '/inet addr/s/^[^:]*:\([0-9.]\{7,15\}\) .*/\1/p'| grep -v "127.0.0.1"`
+	ETHX=bond0
+fi
+IPNOS=`echo $HOSTIP | wc -w`
+FREEDISK=`df -Ph /tcpdumpdata | grep -v Avail | awk '{print $4}' | awk -FG '{print $1}'`
+MINFREEFDISK=1
+
+if [ ! "$HOSTIP" ] || [ $IPNOS -ge 2 ] || [ `expr $FREEDISK \> $MINFREEFDISK` -eq 0 ]
+then
+	echo "Pleasecheck theDeviceIP FREEDISK"$FREEDISK"G" > /tcpdumpdata/tcpdumpdata3.csv
+	exit
+else
+
+	STIME=`date +%F"-"%H%M%S`
+
+	DATE_DIR=`date +%F`
+
+if [ ! -d /tcpdumpdata/$DATE_DIR ]
+then
+	mkdir -p /tcpdumpdata/$DATE_DIR
+fi
+
+
+
+#diy #unit:byte;100MB
+
+#diy
+DUMPPID=`ps aux | grep "tcpdump " | grep nn | awk '{print $2}'`
+
+if [ ! "$DUMPPID" ]
+then
+
+#	/usr/sbin/tcpdump -nn -s0 -w /tcpdumpdata/$DATE_DIR/$STIME.cap&
+	sudo /usr/sbin/tcpdump -nn -i $ETHX -s0 > /tcpdumpdata/$DATE_DIR/$STIME.txt&
+
+fi
+
+DUMPPID=`ps aux | grep "tcpdump " | grep nn | grep root | awk '{print $2}'`
+#PACKSIZE=`ls -l /tcpdumpdata/$DATE_DIR | grep "$STIME.txt" | awk '{print $5}'`
+sleep 1m
+
+#sudo kill -9 $DUMPPID
+#DUMPPID=`ps aux | grep "tcpdump " | grep nn | awk '{print $2}'`
+#if [ $DUMPPID ]
+#then
+	ps aux | grep "tcpdump " | grep nn | awk '{print $2}' | while read line;
+	do
+		sudo kill -9 $line
+	done
+#else	
+ETIME=`date +%H%M%S`
+#/usr/sbin/tcpdump -r /tcpdumpdata/$DATE_DIR/$STIME.cap > /tcpdumpdata/$DATE_DIR/$STIME.txt
+sleep 5
+
+
+awk -F': |[. ]' -v etho="$HOSTIP" '$4~/^[0-9]+$/&&$10~/^[0-9]+$/&&$13~/^[0-9]+$/{print etho" " $4"."$5"."$6"."$7"  "$10"."$11"."$12"."$13"  "$8"  "$14"  "$3 "  "$1"."$2"  "$9}' /tcpdumpdata/$DATE_DIR/$STIME.txt > /tcpdumpdata/$DATE_DIR/$STIME-$ETIME.txt 
+
+#sort /tcpdumpdata/$DATE_DIR/$STIME-$ETIME.txt | uniq -c -f 5 -f 6 -f 7 | sort -nr > /tcpdumpdata/$DATE_DIR/hello$ETIME.txt
+#awk -v etho="$HOSTIP" $2=="$etho"' /tcpdumpdata/$DATE_DIR/$STIME-$ETIME.txt > /tcpdumpdata/$DATE_DIR/tcpdumpA$ETIME.txt
+awk -v etho="$HOSTIP" '$2 == etho&&$3~/^[0-9]+.[0-9]+.[0-9]+.[0-9]+$/' /tcpdumpdata/$DATE_DIR/$STIME-$ETIME.txt > /tcpdumpdata/$DATE_DIR/tcpdumpA$ETIME.txt
+awk -v etho="$HOSTIP" '$2 != etho&&$2~/^[0-9]+.[0-9]+.[0-9]+.[0-9]+$/&&$3~/^[0-9]+.[0-9]+.[0-9]+.[0-9]+$/{print $1" "$3" "$2" "$5" "$4" "$6" "$7" "$8}'  /tcpdumpdata/$DATE_DIR/$STIME-$ETIME.txt >> /tcpdumpdata/$DATE_DIR/tcpdumpA$ETIME.txt
+
+#awk -v etho="$HOSTIP" '$2 != etho{print $1" "$3" "$2" "$5" "$4" "$6" "$7" "$8}'  /tcpdumpdata/$DATE_DIR/$STIME-$ETIME.txt > /tcpdumpdata/$DATE_DIR/tcpdumpC$ETIME.txt
+#awk '{b[$2" "$3" "$4]+=1}END{for(i in b) printf "%s %s %s\n",b[i],$1,i}' /tcpdumpdata/$DATE_DIR/tcpdumpA$ETIME.txt | sort -nr > /tcpdumpdata/$DATE_DIR/tcpdumpB$ETIME.txt 
+
+lport=`netstat -an | grep LISTEN| egrep "0.0.0.0|:::" | awk '/^tcp/{print $4}' | awk -F: '{print $2$4}' | sort -u`
+#echo $lport
+for i in $lport
+do
+        awk -v por="$i" '$4 == por' /tcpdumpdata/$DATE_DIR/tcpdumpA$ETIME.txt >> /tcpdumpdata/$DATE_DIR/tcpdumpC$ETIME.txt
+
+done
+#awk '$3!~/^(10|172|192)/{print $0}' /tcpdumpdata/$DATE_DIR/tcpdumpC$ETIME.txt
+#awk '{b[$2" "$3" "$4]+=1}END{for(i in b) printf "%s\n",i}' /tcpdumpdata/$DATE_DIR/tcpdumpC$ETIME.txt | sort -nr > /tcpdumpdata/$DATE_DIR/tcpdumpB$ETIME.txt 
+awk '$3!~/^(10\.|172\.16|172\.30|172\.31|192\.168)/{print $1,$2,"any",$4,$5,$6,$7,$8}' /tcpdumpdata/$DATE_DIR/tcpdumpC$ETIME.txt > /tcpdumpdata/$DATE_DIR/tcpdumpD$ETIME.txt
+awk '$3~/^(10\.|172\.16|172\.30|172\.31|192\.168)/{print $0}' /tcpdumpdata/$DATE_DIR/tcpdumpC$ETIME.txt >> /tcpdumpdata/$DATE_DIR/tcpdumpD$ETIME.txt
+awk '{b[$2" "$3" "$4]+=1}END{for(i in b) printf "%s\n",i}' /tcpdumpdata/$DATE_DIR/tcpdumpD$ETIME.txt | sort -nr > /tcpdumpdata/$DATE_DIR/tcpdumpB$ETIME.txt
+rm /tcpdumpdata/tcpdumpdata1.csv
+mv /tcpdumpdata/tcpdumpdata2.csv /tcpdumpdata/tcpdumpdata1.csv
+mv /tcpdumpdata/tcpdumpdata3.csv /tcpdumpdata/tcpdumpdata2.csv
+mv /tcpdumpdata/$DATE_DIR/tcpdumpB$ETIME.txt /tcpdumpdata/tcpdumpdata3.csv
+
+#rm -rf /tcpdumpdata/$DATE_DIR
+#fi
+fi
