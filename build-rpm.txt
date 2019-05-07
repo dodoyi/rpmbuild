@@ -1,7 +1,5 @@
 Building RPM from a tarball
 安装创建rpm包所需要的软件
-# yum update
-# yum groupinstall "Development Tools"
 # yum install rpmdevtools rpm-build  redhat-rpm-config  openssl-devel
 
 如果你的用户目录主目录下没有类似目录结构，你可以通过一个工具软件来自动配置和生成，如下。
