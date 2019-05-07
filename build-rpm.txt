@@ -1,17 +1,16 @@
 Building RPM from a tarball
-°²×°´´½¨rpm°üËùĞèÒªµÄÈí¼ş
 # yum install rpmdevtools rpm-build  redhat-rpm-config  openssl-devel
 
-Èç¹ûÄãµÄÓÃ»§Ä¿Â¼Ö÷Ä¿Â¼ÏÂÃ»ÓĞÀàËÆÄ¿Â¼½á¹¹£¬Äã¿ÉÒÔÍ¨¹ıÒ»¸ö¹¤¾ßÈí¼şÀ´×Ô¶¯ÅäÖÃºÍÉú³É£¬ÈçÏÂ¡£
-££yum install rpmdevtools
-ÏÂÁËÔËĞĞ×Ô¶¯ÅäÖÃÃüÁî×Ô¶¯Éú³ÉÈçÉÏÄ¿Â¼£¬²¢ÅäÖÃÒ»Ğ©±ØÒª²Ù×÷¡£
-££rpmdev-setuptree
-rpmdev-setuptreeÃüÁîÄ¬ÈÏ½«ÔÙµ±Ç°ÓÃ»§Ö÷Ä¿Â¼ÏÂ´´½¨Ò»¸öRPM¹¹½¨¸ùÄ¿Â¼½á¹¹£¬
-Èç¹ûĞèÒª¸Ä±ä´ÎÄ¬ÈÏÎ»ÖÃ£¬¿ÉÒÔĞŞ¸ÄÅäÖÃÎÄ¼ş:~/.rpmmacrosÖĞ±äÁ¿_topdir¶ÔÓ¦
-µÄÖµ¼´¿É¡£ 
+å¦‚æœä½ çš„ç”¨æˆ·ç›®å½•ä¸»ç›®å½•ä¸‹æ²¡æœ‰ç±»ä¼¼ç›®å½•ç»“æ„ï¼Œä½ å¯ä»¥é€šè¿‡ä¸€ä¸ªå·¥å…·è½¯ä»¶æ¥è‡ªåŠ¨é…ç½®å’Œç”Ÿæˆï¼Œå¦‚ä¸‹ã€‚
+ï¼ƒyum install rpmdevtools
+ä¸‹äº†è¿è¡Œè‡ªåŠ¨é…ç½®å‘½ä»¤è‡ªåŠ¨ç”Ÿæˆå¦‚ä¸Šç›®å½•ï¼Œå¹¶é…ç½®ä¸€äº›å¿…è¦æ“ä½œã€‚
+ï¼ƒrpmdev-setuptree
+rpmdev-setuptreeå‘½ä»¤é»˜è®¤å°†å†å½“å‰ç”¨æˆ·ä¸»ç›®å½•ä¸‹åˆ›å»ºä¸€ä¸ªRPMæ„å»ºæ ¹ç›®å½•ç»“æ„ï¼Œ
+å¦‚æœéœ€è¦æ”¹å˜æ¬¡é»˜è®¤ä½ç½®ï¼Œå¯ä»¥ä¿®æ”¹é…ç½®æ–‡ä»¶:~/.rpmmacrosä¸­å˜é‡_topdirå¯¹åº”
+çš„å€¼å³å¯ã€‚ 
 
-¿ªÊ¼ÖÆ×÷rpm°ü
-ÏÂÔØËùĞèÒª´ò°üµÄÈí¼şÔ´Âë£¬httpd-2.2.17.tar.gz¸Ãtar°üÀïÃæÒÑ¾­ÓĞ¹Ù·½Ğ´ºÃÁËµÄspecÎÄ¼şËùÒÔ²»ĞèÒªÔÙĞ´ÁË¡£Èç¹ûÄãÏëĞ´¿ÉÒÔ°Ñtar°ü½â¿ª¼ÓÈë×Ô¼ºÏë¶¨ÒåµÄÄÚÈİ£¬ÔÙÓÃÃüÁîrpmbuild --rmspec httpd.spec
+å¼€å§‹åˆ¶ä½œrpmåŒ…
+ä¸‹è½½æ‰€éœ€è¦æ‰“åŒ…çš„è½¯ä»¶æºç ï¼Œhttpd-2.2.17.tar.gzè¯¥taråŒ…é‡Œé¢å·²ç»æœ‰å®˜æ–¹å†™å¥½äº†çš„specæ–‡ä»¶æ‰€ä»¥ä¸éœ€è¦å†å†™äº†ã€‚å¦‚æœä½ æƒ³å†™å¯ä»¥æŠŠtaråŒ…è§£å¼€åŠ å…¥è‡ªå·±æƒ³å®šä¹‰çš„å†…å®¹ï¼Œå†ç”¨å‘½ä»¤rpmbuild --rmspec httpd.spec
 
 $ rpmbuild -tb httpd-2.2.17.tar.gz
 error: Failed build dependencies:
@@ -23,7 +22,7 @@ expat-devel is needed by httpd-2.2.17-1.x86_64
 pcre-devel >= 5.0 is needed by httpd-2.2.17-1.x86_64
 /usr/bin/apr-1-config is needed by httpd-2.2.17-1.x86_64
 /usr/bin/apu-1-config is needed by httpd-2.2.17-1.x86_64
-±àÒë»·¾³È±ÉÙÕâĞ©ÒÀÀµ°ü£¬°ÑËùĞèÒªµÄÒÀÀµ°ü¶¼°²×°ÉÏ
+ç¼–è¯‘ç¯å¢ƒç¼ºå°‘è¿™äº›ä¾èµ–åŒ…ï¼ŒæŠŠæ‰€éœ€è¦çš„ä¾èµ–åŒ…éƒ½å®‰è£…ä¸Š
 
 $ sudo /usr/bin/yum install apr-devel apr-util-devel openldap-devel db4-devel expat-devel pcre-devel
 
@@ -35,7 +34,7 @@ $ rpmbuild -tb httpd-2.2.17.tar.gz
 
 configure: error: distcache support failed: can't include distcache headerserror: Bad exit status from /var/tmp/rpm-tmp.71094 (%build)RPM build errors: Bad exit status from /var/tmp/rpm-tmp.1844 (%build)
 
-°²×°distcache
+å®‰è£…distcache
 $ sudo yum install distcache distcache-devel
 $ rpmbuild -tb httpd-2.2.17.tar.gz
 Executing(%clean): /bin/sh -e /var/tmp/rpm-tmp.55847
@@ -51,28 +50,28 @@ $ ls rpmbuild/RPMS/x86_64/
 httpd-2.2.17-1.x86_64.rpm httpd-devel-2.2.17-1.x86_64.rpm mod_ssl-2.2.17-1.x86_64.rpm
 httpd-debuginfo-2.2.17-1.x86_64.rpm httpd-manual-2.2.17-1.x86_64.rpm
 
-ÖÆ×÷³É¹¦£¡
+åˆ¶ä½œæˆåŠŸï¼
 
 
 Building RPM from a SRPM
-²Î¿¼ÎÄµµ£ºhttps://wiki.centos.org/HowTos/RebuildSRPM
-Ö»ÓÃ¹Ù·½µÄÔ´Âë´ò°ü²»×Ô¶¨ÒåÅäÖÃÎÄ¼ş
+å‚è€ƒæ–‡æ¡£ï¼šhttps://wiki.centos.org/HowTos/RebuildSRPM
+åªç”¨å®˜æ–¹çš„æºç æ‰“åŒ…ä¸è‡ªå®šä¹‰é…ç½®æ–‡ä»¶
 [user@host ~]$ rpmbuild --rebuild /tmp/mypackage-1.0.0-1.src.rpm
-ÓÃSRPMÍ¨¹ıspecfile½øĞĞ´ò°ü
+ç”¨SRPMé€šè¿‡specfileè¿›è¡Œæ‰“åŒ…
 [user@host ~]$ rpm --nomd5 -i /tmp/mypackage-1.0.0-1.src.rpm
-´ËÊ±µ±Ç°Ä¿Â¼ÏÂ»á´´½¨rpmbuildµÄ»·¾³Ä¿Â¼(suseµÄÏà¹ØÎÄ¼ş»á½âÑ¹ËõÔÚ/usr/src/packages/ÏÂ)¡£~/rpmbuild/ Ô´Âë°üµÄÄÚÈİÒÑ¾­±»ÊÍ·Åµ½~/rpmbuild/SOURCEÄ¿Â¼ÏÂ¡£½øÈë~/rpmbuild/SPECS ¶ÔspecÎÄ¼ş°´ÕÕ×Ô¼ºµÄĞèÇó½øĞĞ±à¼­£¬±à¼­Ö®ºóÔËĞĞrpmbuild -ba mypackage.spec »áÔÚ~/rpmbuild/RPMÄÚÉú³É×Ô¶¨ÒåµÄRPM°ü
+æ­¤æ—¶å½“å‰ç›®å½•ä¸‹ä¼šåˆ›å»ºrpmbuildçš„ç¯å¢ƒç›®å½•(suseçš„ç›¸å…³æ–‡ä»¶ä¼šè§£å‹ç¼©åœ¨/usr/src/packages/ä¸‹)ã€‚~/rpmbuild/ æºç åŒ…çš„å†…å®¹å·²ç»è¢«é‡Šæ”¾åˆ°~/rpmbuild/SOURCEç›®å½•ä¸‹ã€‚è¿›å…¥~/rpmbuild/SPECS å¯¹specæ–‡ä»¶æŒ‰ç…§è‡ªå·±çš„éœ€æ±‚è¿›è¡Œç¼–è¾‘ï¼Œç¼–è¾‘ä¹‹åè¿è¡Œrpmbuild -ba mypackage.spec ä¼šåœ¨~/rpmbuild/RPMå†…ç”Ÿæˆè‡ªå®šä¹‰çš„RPMåŒ…
 [user@host ~]$ cd ~/rpmbuild/SPECS
 [user@host ~]$ vi ~/rpmbuild/SPECS
 [user@host SPECS]$ rpmbuild -ba mypackage.spec
 
 
-²Î¿¼ÎÄµµ£º
+å‚è€ƒæ–‡æ¡£ï¼š
 http://www.ibm.com/developerworks/cn/linux/management/package/rpm/part1/
 http://www.ibm.com/developerworks/cn/linux/management/package/rpm/part2/
 http://www.ibm.com/developerworks/cn/linux/management/package/rpm/part3/
 http://fedoraproject.org/wiki/How_to_create_an_RPM_package/zh-cn#.E5.88.86.E7.A6.BB.E7.A8.8B.E5.BA.8F
 
-specÎÄ¼şµÄÀı×Ó£ºindent-1.spec
+specæ–‡ä»¶çš„ä¾‹å­ï¼šindent-1.spec
 Summary: GNU indent
 Name: indent
 Version: 2.2.6
@@ -96,75 +95,75 @@ make install
 %doc /usr/local/info/indent.info
 %doc %attr(0444,root,root) /usr/local/man/man1/indent.1
 %doc COPYING AUTHORS README NEWS
-ÃèÊöÎÄ¼şËµÃ÷ÈçÏÂ£º
-£¨1£© ÎÄ¼şÍ·
-Ò»°ãµÄspecÎÄ¼şÍ·°üº¬ÒÔÏÂ¼¸¸öÓò£º
-Summary£º
-ÓÃÒ»¾ä»°¸ÅÀ¨¸ÃÈí¼ş°ü¾¡Á¿¶àµÄĞÅÏ¢¡£
-Name£º
-Èí¼ş°üµÄÃû×Ö£¬×îÖÕRPMÈí¼ş°üÊÇÓÃ¸ÃÃû×ÖÓë°æ±¾ºÅ£¬ÊÍ³öºÅ¼°ÌåÏµºÅÀ´ÃüÃûÈí¼ş°üµÄ¡£
-Version£º
-Èí¼ş°æ±¾ºÅ¡£½öµ±Èí¼ş°ü±ÈÒÔÇ°ÓĞ½Ï´ó¸Ä±äÊ±²ÅÔö¼Ó°æ±¾ºÅ¡£
-Release£º
-Èí¼ş°üÊÍ³öºÅ¡£Ò»°ãÎÒÃÇ¶Ô¸ÃÈí¼ş°ü×öÁËÒ»Ğ©Ğ¡µÄ²¹¶¡µÄÊ±ºò¾ÍÓ¦¸Ã°ÑÊÍ³öºÅ¼Ó1¡£
-Vendor£º
-Èí¼ş¿ª·¢ÕßµÄÃû×Ö¡£
-Copyright£º
-Èí¼ş°üËù²ÉÓÃµÄ°æÈ¨¹æÔò¡£¾ßÌåÓĞ£ºGPL£¨×ÔÓÉÈí¼ş£©£¬BSD£¬MIT£¬Public Domain£¨¹«¹²Óò£©£¬Distributable£¨¹±Ï×£©£¬commercial£¨ÉÌÒµ£©£¬Share£¨¹²Ïí£©µÈ£¬Ò»°ãµÄ¿ª·¢¶¼Ğ´GPL¡£
-Group£º?
-Èí¼ş°üËùÊôÀà±ğ£¬¾ßÌåÀà±ğÓĞ£º
-Amusements/Games £¨ÓéÀÖ/ÓÎÏ·£©
-Amusements/Graphics£¨ÓéÀÖ/Í¼ĞÎ£©
-Applications/Archiving £¨Ó¦ÓÃ/ÎÄµµ£©
-Applications/Communications£¨Ó¦ÓÃ/Í¨Ñ¶£©
-Applications/Databases £¨Ó¦ÓÃ/Êı¾İ¿â£©
-Applications/Editors £¨Ó¦ÓÃ/±à¼­Æ÷£©
-Applications/Emulators £¨Ó¦ÓÃ/·ÂÕæÆ÷£©
-Applications/Engineering £¨Ó¦ÓÃ/¹¤³Ì£©
-Applications/File £¨Ó¦ÓÃ/ÎÄ¼ş£©
-Applications/Internet £¨Ó¦ÓÃ/ÒòÌØÍø£©
-Applications/Multimedia£¨Ó¦ÓÃ/¶àÃ½Ìå£©
-Applications/Productivity £¨Ó¦ÓÃ/²úÆ·£©
-Applications/Publishing£¨Ó¦ÓÃ/Ó¡Ë¢£©
-Applications/System£¨Ó¦ÓÃ/ÏµÍ³£©
-Applications/Text £¨Ó¦ÓÃ/ÎÄ±¾£©
-Development/Debuggers £¨¿ª·¢/µ÷ÊÔÆ÷£©
-Development/Languages £¨¿ª·¢/ÓïÑÔ£©
-Development/Libraries £¨¿ª·¢/º¯Êı¿â£©
-Development/System £¨¿ª·¢/ÏµÍ³£©
-Development/Tools £¨¿ª·¢/¹¤¾ß£©
-Documentation £¨ÎÄµµ£©
-System Environment/Base£¨ÏµÍ³»·¾³/»ù´¡£©
-System Environment/Daemons £¨ÏµÍ³»·¾³/ÊØ»¤£©
-System Environment/Kernel £¨ÏµÍ³»·¾³/ÄÚºË£©
-System Environment/Libraries £¨ÏµÍ³»·¾³/º¯Êı¿â£©
-System Environment/Shells £¨ÏµÍ³»·¾³/½Ó¿Ú£©
-User Interface/Desktops£¨ÓÃ»§½çÃæ/×ÀÃæ£©
-User Interface/X £¨ÓÃ»§½çÃæ/X´°¿Ú£©
-User Interface/X Hardware Support £¨ÓÃ»§½çÃæ/XÓ²¼şÖ§³Ö£©
-Source£º
-Ô´³ÌĞòÈí¼ş°üµÄÃû×Ö¡£Èç stardict-2.0.tar.gz¡£
-%description£º
-Èí¼ş°üÏêÏ¸ËµÃ÷£¬¿ÉĞ´ÔÚ¶à¸öĞĞÉÏ¡£
-£¨2£©%prep¶Î
-Õâ¸ö¶ÎÊÇÔ¤´¦Àí¶Î£¬Í¨³£ÓÃÀ´Ö´ĞĞÒ»Ğ©½â¿ªÔ´³ÌĞò°üµÄÃüÁî£¬ÎªÏÂÒ»²½µÄ±àÒë°²×°×÷×¼±¸¡£%prepºÍÏÂÃæµÄ%build£¬%install¶ÎÒ»Ñù£¬³ıÁË¿ÉÒÔÖ´ĞĞRPMËù¶¨ÒåµÄºêÃüÁî£¨ÒÔ%¿ªÍ·£©ÒÔÍâ£¬»¹¿ÉÒÔÖ´ĞĞSHELLÃüÁî£¬ÃüÁî¿ÉÒÔÓĞºÜ¶àĞĞ£¬ÈçÎÒÃÇ³£Ğ´µÄtar½â°üÃüÁî¡£
-£¨3£©build¶Î
-±¾¶ÎÊÇ½¨Á¢¶Î£¬ËùÒªÖ´ĞĞµÄÃüÁîÎªÉú³ÉÈí¼ş°ü·şÎñ£¬Èçmake ÃüÁî¡£
-£¨4£©%install¶Î
-±¾¶ÎÊÇ°²×°¶Î£¬ÆäÖĞµÄÃüÁîÔÚ°²×°Èí¼ş°üÊ±½«Ö´ĞĞ£¬Èçmake installÃüÁî¡£
-£¨5£©%files¶Î
-±¾¶ÎÊÇÎÄ¼ş¶Î£¬ÓÃÓÚ¶¨ÒåÈí¼ş°üËù°üº¬µÄÎÄ¼ş£¬·ÖÎªÈıÀà--ËµÃ÷ÎÄµµ£¨doc£©£¬ÅäÖÃÎÄ¼ş£¨config£©¼°Ö´ĞĞ³ÌĞò£¬»¹¿É¶¨ÒåÎÄ¼ş´æÈ¡È¨ÏŞ£¬ÓµÓĞÕß¼°×é±ğ¡£
-£¨6£©%changelog¶Î
-±¾¶ÎÊÇĞŞ¸ÄÈÕÖ¾¶Î¡£Äã¿ÉÒÔ½«Èí¼şµÄÃ¿´ÎĞŞ¸Ä¼ÇÂ¼µ½ÕâÀï£¬±£´æµ½·¢²¼µÄÈí¼ş°üÖĞ£¬ÒÔ±ã²éÑ¯Ö®ÓÃ¡£Ã¿Ò»¸öĞŞ¸ÄÈÕÖ¾¶¼ÓĞÕâÑùÒ»ÖÖ¸ñÊ½£ºµÚÒ»ĞĞÊÇ£º* ĞÇÆÚ ÔÂ ÈÕ Äê ĞŞ¸ÄÈË µç×ÓĞÅÏä¡£ÆäÖĞ£ºĞÇÆÚ¡¢ÔÂ·İ¾ùÓÃÓ¢ÎÄĞÎÊ½µÄÇ°3¸ö×ÖÄ¸£¬ÓÃÖĞÎÄ»á±¨´í¡£½ÓÏÂÀ´µÄĞĞĞ´µÄÊÇĞŞ¸ÄÁËÊ²Ã´µØ·½£¬¿ÉĞ´¶àĞĞ¡£Ò»°ãÒÔ¼õºÅ¿ªÊ¼£¬±ãÓÚºóĞøµÄ²éÔÄ¡£
+æè¿°æ–‡ä»¶è¯´æ˜å¦‚ä¸‹ï¼š
+ï¼ˆ1ï¼‰ æ–‡ä»¶å¤´
+ä¸€èˆ¬çš„specæ–‡ä»¶å¤´åŒ…å«ä»¥ä¸‹å‡ ä¸ªåŸŸï¼š
+Summaryï¼š
+ç”¨ä¸€å¥è¯æ¦‚æ‹¬è¯¥è½¯ä»¶åŒ…å°½é‡å¤šçš„ä¿¡æ¯ã€‚
+Nameï¼š
+è½¯ä»¶åŒ…çš„åå­—ï¼Œæœ€ç»ˆRPMè½¯ä»¶åŒ…æ˜¯ç”¨è¯¥åå­—ä¸ç‰ˆæœ¬å·ï¼Œé‡Šå‡ºå·åŠä½“ç³»å·æ¥å‘½åè½¯ä»¶åŒ…çš„ã€‚
+Versionï¼š
+è½¯ä»¶ç‰ˆæœ¬å·ã€‚ä»…å½“è½¯ä»¶åŒ…æ¯”ä»¥å‰æœ‰è¾ƒå¤§æ”¹å˜æ—¶æ‰å¢åŠ ç‰ˆæœ¬å·ã€‚
+Releaseï¼š
+è½¯ä»¶åŒ…é‡Šå‡ºå·ã€‚ä¸€èˆ¬æˆ‘ä»¬å¯¹è¯¥è½¯ä»¶åŒ…åšäº†ä¸€äº›å°çš„è¡¥ä¸çš„æ—¶å€™å°±åº”è¯¥æŠŠé‡Šå‡ºå·åŠ 1ã€‚
+Vendorï¼š
+è½¯ä»¶å¼€å‘è€…çš„åå­—ã€‚
+Copyrightï¼š
+è½¯ä»¶åŒ…æ‰€é‡‡ç”¨çš„ç‰ˆæƒè§„åˆ™ã€‚å…·ä½“æœ‰ï¼šGPLï¼ˆè‡ªç”±è½¯ä»¶ï¼‰ï¼ŒBSDï¼ŒMITï¼ŒPublic Domainï¼ˆå…¬å…±åŸŸï¼‰ï¼ŒDistributableï¼ˆè´¡çŒ®ï¼‰ï¼Œcommercialï¼ˆå•†ä¸šï¼‰ï¼ŒShareï¼ˆå…±äº«ï¼‰ç­‰ï¼Œä¸€èˆ¬çš„å¼€å‘éƒ½å†™GPLã€‚
+Groupï¼š?
+è½¯ä»¶åŒ…æ‰€å±ç±»åˆ«ï¼Œå…·ä½“ç±»åˆ«æœ‰ï¼š
+Amusements/Games ï¼ˆå¨±ä¹/æ¸¸æˆï¼‰
+Amusements/Graphicsï¼ˆå¨±ä¹/å›¾å½¢ï¼‰
+Applications/Archiving ï¼ˆåº”ç”¨/æ–‡æ¡£ï¼‰
+Applications/Communicationsï¼ˆåº”ç”¨/é€šè®¯ï¼‰
+Applications/Databases ï¼ˆåº”ç”¨/æ•°æ®åº“ï¼‰
+Applications/Editors ï¼ˆåº”ç”¨/ç¼–è¾‘å™¨ï¼‰
+Applications/Emulators ï¼ˆåº”ç”¨/ä»¿çœŸå™¨ï¼‰
+Applications/Engineering ï¼ˆåº”ç”¨/å·¥ç¨‹ï¼‰
+Applications/File ï¼ˆåº”ç”¨/æ–‡ä»¶ï¼‰
+Applications/Internet ï¼ˆåº”ç”¨/å› ç‰¹ç½‘ï¼‰
+Applications/Multimediaï¼ˆåº”ç”¨/å¤šåª’ä½“ï¼‰
+Applications/Productivity ï¼ˆåº”ç”¨/äº§å“ï¼‰
+Applications/Publishingï¼ˆåº”ç”¨/å°åˆ·ï¼‰
+Applications/Systemï¼ˆåº”ç”¨/ç³»ç»Ÿï¼‰
+Applications/Text ï¼ˆåº”ç”¨/æ–‡æœ¬ï¼‰
+Development/Debuggers ï¼ˆå¼€å‘/è°ƒè¯•å™¨ï¼‰
+Development/Languages ï¼ˆå¼€å‘/è¯­è¨€ï¼‰
+Development/Libraries ï¼ˆå¼€å‘/å‡½æ•°åº“ï¼‰
+Development/System ï¼ˆå¼€å‘/ç³»ç»Ÿï¼‰
+Development/Tools ï¼ˆå¼€å‘/å·¥å…·ï¼‰
+Documentation ï¼ˆæ–‡æ¡£ï¼‰
+System Environment/Baseï¼ˆç³»ç»Ÿç¯å¢ƒ/åŸºç¡€ï¼‰
+System Environment/Daemons ï¼ˆç³»ç»Ÿç¯å¢ƒ/å®ˆæŠ¤ï¼‰
+System Environment/Kernel ï¼ˆç³»ç»Ÿç¯å¢ƒ/å†…æ ¸ï¼‰
+System Environment/Libraries ï¼ˆç³»ç»Ÿç¯å¢ƒ/å‡½æ•°åº“ï¼‰
+System Environment/Shells ï¼ˆç³»ç»Ÿç¯å¢ƒ/æ¥å£ï¼‰
+User Interface/Desktopsï¼ˆç”¨æˆ·ç•Œé¢/æ¡Œé¢ï¼‰
+User Interface/X ï¼ˆç”¨æˆ·ç•Œé¢/Xçª—å£ï¼‰
+User Interface/X Hardware Support ï¼ˆç”¨æˆ·ç•Œé¢/Xç¡¬ä»¶æ”¯æŒï¼‰
+Sourceï¼š
+æºç¨‹åºè½¯ä»¶åŒ…çš„åå­—ã€‚å¦‚ stardict-2.0.tar.gzã€‚
+%descriptionï¼š
+è½¯ä»¶åŒ…è¯¦ç»†è¯´æ˜ï¼Œå¯å†™åœ¨å¤šä¸ªè¡Œä¸Šã€‚
+ï¼ˆ2ï¼‰%prepæ®µ
+è¿™ä¸ªæ®µæ˜¯é¢„å¤„ç†æ®µï¼Œé€šå¸¸ç”¨æ¥æ‰§è¡Œä¸€äº›è§£å¼€æºç¨‹åºåŒ…çš„å‘½ä»¤ï¼Œä¸ºä¸‹ä¸€æ­¥çš„ç¼–è¯‘å®‰è£…ä½œå‡†å¤‡ã€‚%prepå’Œä¸‹é¢çš„%buildï¼Œ%installæ®µä¸€æ ·ï¼Œé™¤äº†å¯ä»¥æ‰§è¡ŒRPMæ‰€å®šä¹‰çš„å®å‘½ä»¤ï¼ˆä»¥%å¼€å¤´ï¼‰ä»¥å¤–ï¼Œè¿˜å¯ä»¥æ‰§è¡ŒSHELLå‘½ä»¤ï¼Œå‘½ä»¤å¯ä»¥æœ‰å¾ˆå¤šè¡Œï¼Œå¦‚æˆ‘ä»¬å¸¸å†™çš„tarè§£åŒ…å‘½ä»¤ã€‚
+ï¼ˆ3ï¼‰buildæ®µ
+æœ¬æ®µæ˜¯å»ºç«‹æ®µï¼Œæ‰€è¦æ‰§è¡Œçš„å‘½ä»¤ä¸ºç”Ÿæˆè½¯ä»¶åŒ…æœåŠ¡ï¼Œå¦‚make å‘½ä»¤ã€‚
+ï¼ˆ4ï¼‰%installæ®µ
+æœ¬æ®µæ˜¯å®‰è£…æ®µï¼Œå…¶ä¸­çš„å‘½ä»¤åœ¨å®‰è£…è½¯ä»¶åŒ…æ—¶å°†æ‰§è¡Œï¼Œå¦‚make installå‘½ä»¤ã€‚
+ï¼ˆ5ï¼‰%filesæ®µ
+æœ¬æ®µæ˜¯æ–‡ä»¶æ®µï¼Œç”¨äºå®šä¹‰è½¯ä»¶åŒ…æ‰€åŒ…å«çš„æ–‡ä»¶ï¼Œåˆ†ä¸ºä¸‰ç±»--è¯´æ˜æ–‡æ¡£ï¼ˆdocï¼‰ï¼Œé…ç½®æ–‡ä»¶ï¼ˆconfigï¼‰åŠæ‰§è¡Œç¨‹åºï¼Œè¿˜å¯å®šä¹‰æ–‡ä»¶å­˜å–æƒé™ï¼Œæ‹¥æœ‰è€…åŠç»„åˆ«ã€‚
+ï¼ˆ6ï¼‰%changelogæ®µ
+æœ¬æ®µæ˜¯ä¿®æ”¹æ—¥å¿—æ®µã€‚ä½ å¯ä»¥å°†è½¯ä»¶çš„æ¯æ¬¡ä¿®æ”¹è®°å½•åˆ°è¿™é‡Œï¼Œä¿å­˜åˆ°å‘å¸ƒçš„è½¯ä»¶åŒ…ä¸­ï¼Œä»¥ä¾¿æŸ¥è¯¢ä¹‹ç”¨ã€‚æ¯ä¸€ä¸ªä¿®æ”¹æ—¥å¿—éƒ½æœ‰è¿™æ ·ä¸€ç§æ ¼å¼ï¼šç¬¬ä¸€è¡Œæ˜¯ï¼š* æ˜ŸæœŸ æœˆ æ—¥ å¹´ ä¿®æ”¹äºº ç”µå­ä¿¡ç®±ã€‚å…¶ä¸­ï¼šæ˜ŸæœŸã€æœˆä»½å‡ç”¨è‹±æ–‡å½¢å¼çš„å‰3ä¸ªå­—æ¯ï¼Œç”¨ä¸­æ–‡ä¼šæŠ¥é”™ã€‚æ¥ä¸‹æ¥çš„è¡Œå†™çš„æ˜¯ä¿®æ”¹äº†ä»€ä¹ˆåœ°æ–¹ï¼Œå¯å†™å¤šè¡Œã€‚ä¸€èˆ¬ä»¥å‡å·å¼€å§‹ï¼Œä¾¿äºåç»­çš„æŸ¥é˜…ã€‚
 %pre
-ÔÚ°²×°°üÖ®Ç°ÔËĞĞ
+åœ¨å®‰è£…åŒ…ä¹‹å‰è¿è¡Œ
 %post
-ÔÚ°²×°°üÖ®ºóÔËĞĞ
+åœ¨å®‰è£…åŒ…ä¹‹åè¿è¡Œ
 %preun
-ÔÚĞ¶ÔØ°üÖ®Ç°ÔËĞĞ
+åœ¨å¸è½½åŒ…ä¹‹å‰è¿è¡Œ
 %postun
-ÔÚĞ¶ÔØ°üÖ®ºóÔËĞĞ
-°²×°¼°Ğ¶ÔØ£º
+åœ¨å¸è½½åŒ…ä¹‹åè¿è¡Œ
+å®‰è£…åŠå¸è½½ï¼š
 http://www.ibm.com/developerworks/cn/linux/management/package/rpm/part2/
 http://www.ibm.com/developerworks/library/l-rpm2/
 
